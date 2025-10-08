@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './Login.css';
-import './Cadastro.css';
-import Login from './Login';
-import Login from './Cadastro';
+//import './Login.css';
+//import Login from './Login';
+import Cadastro from './pages/Cadastro';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login />
+    <Cadastro />
   </React.StrictMode>
 );
 

@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import "./Cadastro.css";
+import "../styles/Cadastro.css";
 
 const Cadastro = () => {
   const handleSubmit = (e) => {
