@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import "./Login.css";
+import "../styles/Login.css";
 
 const Login = () => {
   const handleSubmit = (e) => {
