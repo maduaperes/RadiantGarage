@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../services/SupabaseClient";
 import logo from "../assets/logo.png";
 import "../styles/Cadastro.css";
 
 const Cadastro = () => {
-  const handleSubmit = (e) => {
+  const [feedback, setFeedback] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você coloca a lógica de cadastro
+
+    const form = e.target;
+    const nome = form[0].value;
+    const email = form[1].value;
+    const senha = form[2].value;
+    const cpf = form[3].value;
+
+    // Cadastro no Supabase Auth
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: senha,
+    });
+
+    if (error) {
+      setFeedback("Erro ao cadastrar: " + error.message);
+      return;
+    }
+
+    // Inserção de dados extras
+    const { error: insertError } = await supabase.from("usuarios").insert([
+      { nome, email, cpf, tipo: "cliente" },
+    ]);
+
+    if (insertError) {
+      setFeedback("Erro ao salvar dados: " + insertError.message);
+    } else {
+      setFeedback("Conta criada com sucesso!");
+      form.reset();
+    }
   };
 
   return (
@@ -17,45 +49,21 @@ const Cadastro = () => {
 
       <main className="card">
         <h2>Cadastro</h2>
-
         <div className="signup-container">
-          {/* Radios */}
-          <input type="radio" id="cliente" name="userType" defaultChecked />
-          <label htmlFor="cliente" className="radio-label">Cliente</label>
-
-          <input type="radio" id="estabelecimento" name="userType" />
-          <label htmlFor="estabelecimento" className="radio-label">Estabelecimento</label>
-
-          {/* Formulário */}
           <form id="signupForm" onSubmit={handleSubmit}>
-            {/* Campos Cliente */}
-            <div id="clienteFields" className="fields">
-              <input type="text" placeholder="Nome completo" required />
-              <input type="email" placeholder="Email" required />
-              <input type="password" placeholder="Senha" required />
-              <input type="text" placeholder="CPF" required />
-            </div>
-
-            {/* Campos Estabelecimento */}
-            <div id="establishmentFields" className="fields">
-              <input type="text" placeholder="Nome do Estabelecimento" required />
-              <input type="text" placeholder="CNPJ" required />
-              <input type="text" placeholder="Endereço completo" required />
-              <input type="text" placeholder="Cidade" required />
-              <input type="text" placeholder="Estado" required />
-              <input type="text" placeholder="CEP" required />
-              <input type="text" placeholder="Horário de funcionamento" />
-            </div>
-
+            <input type="text" placeholder="Nome completo" required />
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Senha" required />
+            <input type="text" placeholder="CPF" required />
             <button className="primary" type="submit">Criar conta</button>
           </form>
         </div>
 
         <p className="muted">
-          <a href="login.html">Já tem conta? Entrar</a>
+          <Link to="/login">Já tem conta? Entrar</Link>
         </p>
 
-        <div id="feedback" className="feedback-message"></div>
+        <div id="feedback" className="feedback-message">{feedback}</div>
       </main>
     </div>
   );

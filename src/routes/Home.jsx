@@ -1,15 +1,11 @@
 import React from "react";
 
 const Home = () => {
-    // eslint-disable-next-line
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aqui você coloca a lógica de cadastro
-  };
-
   return (
     <div>
       <h1>Home</h1>
+      <p>Bem-vindo ao sistema! 🏠</p>
+      <p>Navegue para <a href="/login">Login</a> ou <a href="/cadastro">Cadastro</a></p>
     </div>
   );
 };
