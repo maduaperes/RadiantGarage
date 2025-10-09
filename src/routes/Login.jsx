@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../services/SupabaseClient";
 import logo from "../assets/logo.png";
 import "../styles/Login.css";
 
 const Login = () => {
-  const handleSubmit = (e) => {
+  const [feedback, setFeedback] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica de login
+    const form = e.target;
+    const email = form.email.value;
+    const senha = form.password.value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password: senha,
+    });
+
+    if (error) {
+      setFeedback("Erro ao entrar: " + error.message);
+      return;
+    }
+
+    setFeedback("Login realizado com sucesso!");
+    console.log("Usuário logado:", data.user);
+    window.location.href = "/";
   };
 
   return (
@@ -16,34 +36,23 @@ const Login = () => {
       </header>
 
       <main className="card">
-        <div className="back" id="btnBack">⇦</div>
         <h2>Entrar</h2>
 
         <form id="loginForm" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email ou telefone</label>
-          <input
-            id="email"
-            placeholder="ex: voce@exemplo.com ou (11) 9xxxx-xxxx"
-          />
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="ex: voce@exemplo.com" />
 
           <label htmlFor="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="••••••"
-          />
+          <input id="password" name="password" type="password" required placeholder="••••••" />
 
           <button className="primary" type="submit">Entrar</button>
         </form>
 
-        <div className="socials">
-          <button className="social">Entrar com Google</button>
-          <button className="social">Entrar com Facebook</button>
-        </div>
-
         <p className="muted">
-          Ainda não tem conta? <a href="signup.html">Cadastre-se</a>
+          Ainda não tem conta? <Link to="/cadastro">Cadastre-se</Link>
         </p>
+
+        <div id="feedback" className="feedback-message">{feedback}</div>
       </main>
     </div>
   );
