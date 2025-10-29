@@ -1,0 +1,175 @@
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.user a {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.user a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Card */
+.card {
+  width: 100%;
+  max-width: 600px;
+  padding: 50px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.6s ease;
+  color: #e6eef8;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+
+/* Título */
+h2 {
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #fff;
+}
+
+/* Sub-título */
+p.subtitle {
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #94a3b8;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #e6eef8;
+  font-size: 0.95rem;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Botão primário */
+.primary {
+  margin-top: 18px;
+  background: #413ba7;
+  border: 0;
+  padding: 14px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões sociais */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.social {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  background: #ffffff0d;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+}
+
+.social:hover {
+  background: #ffffff22;
+}
+
+/* Texto "muted" */
+.muted {
+  color: #94a3b8;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 14px;
+  transition: color 0.3s;
+}
+
+.muted a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.muted a:hover {
+  color: #213fc7;
+}
+
+/* Corrige o autofill do navegador para inputs (especialmente em Chrome) */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
+  -webkit-text-fill-color: #e6eef8 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.feedback-message {
+  margin-top: 20px;
+  /* espaço para separar do texto acima */
+  text-align: center;
+  /* centraliza o texto */
+  font-size: 13px;
+  min-height: 1.2em;
+  /* para manter espaço mesmo quando vazio */
+}
+
+/* Animação de fadeIn */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
