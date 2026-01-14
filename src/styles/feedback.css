@@ -1,0 +1,446 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(180deg, #0b1220, #111827);
+  color: #e6eef8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================
+   HEADER
+========================== */
+header.header {
+    display: flex;
+    align-items: center;
+    /* Alinha Logo na esquerda e o right-group na direita */
+    justify-content: flex-start;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
+    min-height: 48px;
+    /* Essencial para o posicionamento absoluto da busca */
+    position: relative; 
+}
+
+/* 1. LOGO: Posição Esquerda */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    flex: 0 0 auto; /* Não cresce */
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.logo span {
+    font-weight: bold;
+}
+
+.logo-icon {
+    font-size: 1.3rem;
+}
+
+/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
+.search-box {
+    /* CHAVE: Centralização Perfeita */
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 1; /* Garante que fique sobre outros elementos */
+}
+
+.search-box input {
+    height: 28px;
+    width: 350px; 
+    padding: 0 32px 0 8px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e6eef8;
+    transition: background 0.2s ease;
+}
+
+.search-box input::placeholder {
+    color: #94a3b8;
+}
+
+.search-box input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.search-box button:hover {
+    color: #fff;
+}
+
+/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
+.right-group {
+    display: flex;
+    align-items: center;
+    /* Espaço entre o menu NAV e o botão USER */
+    gap: 1.5rem; 
+    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+    margin-left: auto;
+    z-index: 2;
+}
+
+/* 4. NAV: Agrupamento de Links DENTRO do right-group */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+    transform: translateY(-2px);
+    color: #aaa;
+}
+
+.nav span {
+    margin: 0 0.2rem;
+}
+
+/* 5. USER (Login): DENTRO do right-group */
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: #fff;
+    background: #413ba7;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   CARD PRINCIPAL
+========================== */
+.card {
+  width: 100%;
+  max-width: 900px;
+  margin: 110px auto 40px;
+  padding: 3rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  margin-top: 40px;
+}
+
+.card h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  color: #f8fafc;
+}
+
+.intro {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* ==========================
+   BOTÃO VOLTAR
+========================== */
+.back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================
+   FORMULÁRIO PRINCIPAL
+========================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Linha 1 - Nome e Email */
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Linha 2 - Tipo de feedback */
+.row-full {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Linha 3 - Avaliações */
+.row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Linha 4 e 5 - Upload e Privacidade */
+.full-width-field {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+input,
+select,
+textarea {
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1; 
+}
+
+/* ==========================
+   ESTRELAS DE AVALIAÇÃO
+========================== */
+.rating-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stars {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.6rem;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.stars span {
+  color: #6b7280;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.stars span.hover,
+.stars span.selected {
+  color: #facc15;
+  transform: scale(1.2);
+}
+
+/* ==========================
+   UPLOAD E PRIVACIDADE
+========================== */
+.upload input[type="file"] {
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.privacy input {
+  margin-top: 0.25rem;
+}
+
+input[type="checkbox"] {
+ accent-color: #413ba7;
+}
+
+/* ==========================
+   BOTÕES
+========================== */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+button.primary {
+  flex: 1;
+  padding: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: #413ba7;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+button.secondary {
+  flex: 1;
+  padding: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+option {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#feedbackMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4ade80;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#feedbackMessage.active {
+    display: flex;
+    opacity: 1;
+}
+
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  margin-top: auto;
+}
+
+#charCount {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 800px) {
+  .row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .row-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}

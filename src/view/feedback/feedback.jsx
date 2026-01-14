@@ -1,136 +1,195 @@
-import React, { useState, useEffect } from 'react';
-import './FeedbackForm.css';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../styles/feedback.css";
 
-const FeedbackForm = () => {
-  const [attendanceRating, setAttendanceRating] = useState(0);
-  const [serviceRating, setServiceRating] = useState(0);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
-  const [charCount, setCharCount] = useState(0);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
-  const [submitDisabled, setSubmitDisabled] = useState(true);
+export default function Feedback() {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    nome: "",
+    email: "",
+    titulo: "",
+    descricao: "",
+    agree: false,
+  });
+
+  const [ratings, setRatings] = useState({
+    geral: 0,
+    servico: 0,
+    atendimento: 0,
+  });
+
+  const [charLeft, setCharLeft] = useState(500);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const isEmpty = attendanceRating === 0 &&
-      serviceRating === 0 &&
-      title.trim() === '' &&
-      description.trim() === '';
-    setSubmitDisabled(isEmpty);
-  }, [attendanceRating, serviceRating, title, description]);
+    setCharLeft(500 - form.descricao.length);
+  }, [form.descricao]);
 
-  const handleStarClick = (type, value) => {
-    const rating = parseInt(value);
-    if (type === 'attendance') {
-      setAttendanceRating(rating);
-    } else {
-      setServiceRating(rating);
+  function handleChange(e) {
+    const { name, value, type, checked } = e.target;
+
+    setForm({
+      ...form,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  }
+
+  function handleStars(tipo, valor) {
+    setRatings({
+      ...ratings,
+      [tipo]: valor,
+    });
+  }
+
+  function canSubmit() {
+    const hasRating =
+      ratings.geral > 0 || ratings.servico > 0 || ratings.atendimento > 0;
+
+    return hasRating && form.agree;
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!canSubmit()) {
+      setMessage("Preencha a avaliação e aceite os termos.");
+      return;
     }
-  };
 
-  const handleClear = () => {
-    setAttendanceRating(0);
-    setServiceRating(0);
-    setTitle('');
-    setDescription('');
-    setCharCount(0);
-    setImage(null);
-    setFeedbackMessage('');
-  };
-
-  const handleSubmit = () => {
     const review = {
-      title: title.trim(),
-      description: description.trim(),
-      attendanceRating,
-      serviceRating,
-      image: image?.name || '',
-      date: new Date().toISOString(),
+      nome: form.nome || "Anônimo",
+      email: form.email,
+      titulo: form.titulo,
+      descricao: form.descricao,
+      ratings,
+      data: new Date().toLocaleString("pt-BR"),
     };
 
-    const storedReviews = JSON.parse(localStorage.getItem('lj_reviews') || '[]');
-    storedReviews.unshift(review);
-    localStorage.setItem('lj_reviews', JSON.stringify(storedReviews));
+    const reviews = JSON.parse(
+      localStorage.getItem("radiant_reviews") || "[]"
+    );
 
-    setFeedbackMessage('Obrigado pela avaliação!');
-    handleClear();
-  };
+    reviews.unshift(review);
+    localStorage.setItem("radiant_reviews", JSON.stringify(reviews));
 
-  const renderStars = (type, selectedValue) => {
-    return [...Array(5)].map((_, i) => {
-      const value = i + 1;
-      const isSelected = value <= selectedValue;
+    setMessage("Obrigado pelo feedback!");
 
-      return (
-        <span
-          key={value}
-          data-value={value}
-          className={isSelected ? 'selected' : ''}
-          onClick={() => handleStarClick(type, value)}
-        >
-          ★
-        </span>
-      );
-    });
-  };
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 2000);
+  }
+
+  function renderStars(tipo) {
+    return [...Array(5)].map((_, i) => (
+      <span
+        key={i}
+        className={ratings[tipo] >= i + 1 ? "selected" : ""}
+        onClick={() => handleStars(tipo, i + 1)}
+      >
+        ★
+      </span>
+    ));
+  }
 
   return (
-    <main className="card">
-      <div className="back" onClick={() => (window.location.href = 'status.html')}>↩</div>
-      <h2>Avalie seu serviço</h2>
+    <>
+      <header className="header">
+        <div className="logo">
+          <span>RadiantGarage</span>
+        </div>
+      </header>
 
-      <input
-        type="text"
-        placeholder="Título da avaliação"
-        maxLength="50"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <main className="card">
+        <div className="back" onClick={() => navigate(-1)}>
+          ↩
+        </div>
 
-      <textarea
-        placeholder="Descreva sua experiência"
-        maxLength="200"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-          setCharCount(e.target.value.length);
-        }}
-        rows={4}
-      />
-      <div id="charCount">{charCount}/200</div>
+        <h2>Queremos saber sua opinião!</h2>
+        <p className="intro">
+          Sua opinião é muito importante para nós!
+        </p>
 
-      <div className="rating-section">
-        <label>Atendimento:</label>
-        <div className="stars">{renderStars('attendance', attendanceRating)}</div>
-      </div>
+        <form onSubmit={handleSubmit}>
+          <div className="row-2">
+            <div>
+              <label>Seu nome (opcional)</label>
+              <input name="nome" value={form.nome} onChange={handleChange} />
+            </div>
 
-      <div className="rating-section">
-        <label>Serviço:</label>
-        <div className="stars">{renderStars('service', serviceRating)}</div>
-      </div>
+            <div>
+              <label>Seu e-mail (opcional)</label>
+              <input
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
 
-      <div className="upload">
-        <label htmlFor="image">Adicionar foto:</label>
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-      </div>
+          <div className="row-full">
+            <label>Título da avaliação</label>
+            <input
+              name="titulo"
+              maxLength={50}
+              value={form.titulo}
+              onChange={handleChange}
+            />
 
-      <div className="buttons">
-        <button className="primary" disabled={submitDisabled} onClick={handleSubmit}>
-          Enviar
-        </button>
-        <button className="secondary" onClick={handleClear}>
-          Limpar
-        </button>
-      </div>
+            <textarea
+              name="descricao"
+              rows="4"
+              maxLength={500}
+              value={form.descricao}
+              onChange={handleChange}
+              placeholder="Descreva sua experiência"
+            />
+            <div id="charCount">{charLeft} caracteres disponíveis</div>
+          </div>
 
-      {feedbackMessage && <div className="feedback-message">{feedbackMessage}</div>}
-    </main>
+          <div className="row-3">
+            <div className="rating-section">
+              <label>Avaliação geral</label>
+              <div className="stars">{renderStars("geral")}</div>
+            </div>
+
+            <div className="rating-section">
+              <label>Serviço</label>
+              <div className="stars">{renderStars("servico")}</div>
+            </div>
+
+            <div className="rating-section">
+              <label>Atendimento</label>
+              <div className="stars">{renderStars("atendimento")}</div>
+            </div>
+          </div>
+
+          <div className="privacy">
+            <input
+              type="checkbox"
+              name="agree"
+              checked={form.agree}
+              onChange={handleChange}
+            />
+            <label>
+              Concordo que meu feedback será usado para aprimorar os serviços.
+            </label>
+          </div>
+
+          <div className="buttons">
+            <button className="primary" disabled={!canSubmit()}>
+              Enviar
+            </button>
+          </div>
+
+          {message && <p id="feedbackMessage" className="active">{message}</p>}
+        </form>
+      </main>
+
+      <footer>
+        <p>&copy; 2025 RadiantGarage</p>
+      </footer>
+    </>
   );
-};
-
-export default FeedbackForm;
+}
