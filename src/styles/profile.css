@@ -1,0 +1,556 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-y: scroll;
+  /* sempre reserva espaço p/ rolagem vertical */
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(180deg, #0b1220, #111827);
+  color: #e6eef8;
+  min-height: 100vh;
+  /* Use min-height em vez de height fixo */
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  width: 100%;
+  /* Força largura total */
+  overflow-x: hidden;
+  /* Evita scrolls laterais estranhos */
+}
+
+/* ==========================
+   HEADER
+========================== */
+header.header {
+  display: flex;
+  align-items: center;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
+}
+
+/* 1. LOGO: Posição Esquerda */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.logo span {
+  font-weight: bold;
+}
+
+.logo-icon {
+  font-size: 1.3rem;
+}
+
+/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
+.search-box {
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
+}
+
+.search-box input {
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.search-box input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.search-box button:hover {
+  color: #fff;
+}
+
+/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
+.right-group {
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
+}
+
+/* 4. NAV: Agrupamento de Links DENTRO do right-group */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+  transform: translateY(-2px);
+  color: #aaa;
+}
+
+.nav span {
+  margin: 0 0.2rem;
+}
+
+/* 5. USER (Login): DENTRO do right-group */
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.user a {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   MAIN
+========================== */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* Centraliza verticalmente (equador da tela) */
+  justify-content: center;
+  /* Centraliza horizontalmente */
+  padding: 60px 20px;
+  /* Garante respiro de 60px no topo e bottom */
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(100vh - 48px);
+  /* Desconta a altura do header */
+}
+
+/* ==========================
+   CARD DE PERFIL
+========================== */
+.profile-card {
+  width: 100%;
+  max-width: 500px;
+  /* Mantém a largura original */
+  height: auto;
+  /* MUITO IMPORTANTE: Remove o 70%, o card agora é curto */
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 1.5rem;
+  /* Padding reduzido para achatar o card */
+  animation: fadeIn 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Espaçamento menor entre os elementos */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 auto;
+  /* Garante centro se o flex falhar */
+}
+
+/* Ajuste leve no cabeçalho do perfil para o novo tamanho */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 0;
+  /* Remove margens extras */
+}
+
+.avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Garante que a imagem fique redonda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #413ba7;
+  /* Um contorno para destacar a foto */
+  flex-shrink: 0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Faz a imagem preencher o círculo sem esticar */
+}
+
+.user-info h2 {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.user-info p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.history-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+}
+
+.history-section {
+  margin-top: 0.5rem;
+  /* Diminuído de 2rem */
+}
+
+.user-info h2 {
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.user-info p {
+  color: #94a3b8;
+}
+
+/* ===== BOTÕES ===== */
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #413ba7;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #514ac9;
+}
+
+.btn-secondary {
+  background: #475569;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background: #334155;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* ==========================
+   HISTÓRICO DE SERVIÇOS
+========================== */
+.history-section {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.history-section h3 {
+  color: #93c5fd;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  border-radius: 15px;
+  transition: transform 0.2s, background 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid #413ba7;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.history-item .status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.status.agendado {
+  background: #ffcc00;
+  color: #071126;
+}
+
+.status.concluido {
+  background: #28a745;
+  color: #fff;
+}
+
+.status.cancelado {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-secondary {
+  margin-top: 25px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #3a4a70;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: #556699;
+}
+
+/* ==========================
+   MODAIS
+========================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #111827;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.4s ease;
+}
+
+.modal-content input {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* No seu profile.css, garanta que a lista de veículos tenha scroll se crescer */
+.vehicles-section .history-list {
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  margin-top: auto;
+}
+
+/* ==========================
+   ANIMAÇÕES
+========================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 900px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+}
+
+@media (max-width: 600px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}

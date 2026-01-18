@@ -1,10 +1,11 @@
-/* ==========================
-   Reset e base
-========================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 body {
@@ -16,392 +17,370 @@ body {
   flex-direction: column;
 }
 
-html {
-  overflow-y: scroll;
-}
-
 /* ==========================
-   HEADER DASHBOARD AJUSTADO
+   HEADER
 ========================== */
 header.header {
-    display: flex;
-    align-items: center;
-    /* Alinha Logo na esquerda e o right-group na direita */
-    justify-content: flex-start;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
-    /* Essencial para o posicionamento absoluto da busca */
-    position: relative; 
+  display: flex;
+  align-items: center;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
 }
 
 /* 1. LOGO: Posição Esquerda */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
-    cursor: pointer;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .logo span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .logo-icon {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
-    /* CHAVE: Centralização Perfeita */
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
 }
 
 .search-box input {
-    height: 28px;
-    width: 350px; 
-    padding: 0 32px 0 8px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e6eef8;
-    transition: background 0.2s ease;
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
 }
 
 .search-box input::placeholder {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
 .search-box input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .search-box button {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    cursor: pointer;
-    font-size: 0.9rem;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .search-box button:hover {
-    color: #fff;
+  color: #fff;
 }
 
 /* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
 .right-group {
-    display: flex;
-    align-items: center;
-    /* Espaço entre o menu NAV e o botão USER */
-    gap: 1.5rem; 
-    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
-    margin-left: auto;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
 }
 
 /* 4. NAV: Agrupamento de Links DENTRO do right-group */
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 .nav a {
-    font-size: 0.85rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
-    transform: translateY(-2px);
-    color: #aaa;
+  transform: translateY(-2px);
+  color: #aaa;
 }
 
 .nav span {
-    margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 
 /* 5. USER (Login): DENTRO do right-group */
 .user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .user a {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    color: #fff;
-    background: #413ba7;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .user a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================
-   MAIN DASHBOARD AJUSTADO
+   MAIN / CARD
 ========================== */
-main.dashboard {
+main {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
-  width: 100%;
-}
-
-/* ===== VISÃO GERAL (OVERVIEW) ===== */
-.overview {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-}
-
-.overview h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.overview-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-}
-
-.overview-cards .card {
-  background: #ffffff0d;
-  padding: 1.2rem;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.overview-cards .card h3 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.overview-cards .card p {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-/* ===== AÇÕES RÁPIDAS (CORRIGIDO E MELHORADO) ===== */
-.quick-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  animation: fadeIn 0.6s ease;
-}
-
-.quick-actions h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* Layout dos botões */
-.quick-actions .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-/* Links como botões */
-.quick-actions .actions a {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  text-decoration: none;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
-}
-
-/* Botão primário */
-.quick-actions .actions a.primary {
-  background: #413ba7;
-  color: #fff;
-}
-
-.quick-actions .actions a.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  background: #4a42c5;
-}
-
-/* Botão secundário */
-.quick-actions .actions a.secondary {
-  background: #ffffff14;
-  color: #fff;
-}
-
-.quick-actions .actions a.secondary:hover {
-  background: #ffffff1f;
-  transform: translateY(-2px);
-}
-
-/* ===== CARDS DETALHADOS ===== */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
+  padding: 2rem 1rem;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  padding: 28px;
   border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  position: relative;
   animation: fadeIn 0.6s ease;
+  height: fit-content;
+  margin-top: 60px;
 }
 
-.card h3 {
-  margin-bottom: 0.8rem;
+.back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.1rem;
-  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card ul {
-  list-style: none;
+.back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.card ul li {
-  margin-bottom: 0.5rem;
+/* TEXTOS */
+h2 {
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #fff;
+}
+
+.subtitle {
+  text-align: center;
   font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 20px;
 }
 
-/* ===== GRÁFICOS ===== */
-.charts {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.chart-cards {
+/* ==========================
+   FORMULÁRIO (3 COLUNAS)
+========================== */
+form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-.chart-section {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* ===== PROMOÇÕES ===== */
-.promo {
+.col {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
   width: 100%;
 }
 
-.promoCard {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* ===== FEEDBACK CLIENTES ===== */
-.feedback {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-}
-
-.feedback h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.feedback-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 12px;
+/* Inputs, selects e textarea */
+form label {
   font-size: 0.9rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  color: #cbd5e1;
 }
 
-/* ===== UNIDADES ===== */
-.mapCard {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+form input,
+form select,
+form textarea {
   width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 0.95rem;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.btn-primary {
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+/* MULTI-SELECT */
+.multi-select {
+  position: relative;
+}
+
+.multi-select .select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.multi-select .options-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 8px 0;
+  margin-top: 4px;
+  z-index: 5;
+}
+
+.multi-select .options-container label {
+  display: block;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #e6eef8;
+}
+
+.multi-select .options-container label:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+
+/* BOTÕES */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 4%;
+  margin-top: 16px;
+}
+
+.primary {
   background: #413ba7;
   border: 0;
-  padding: 8px 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  font-size: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 48%;
 }
 
-.btn-primary:hover {
-  background: #39358d;
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(65, 59, 167, 0.4);
 }
 
-.btn-secondary {
-  background: #ffffff14;
+.secondary {
+  background: #6b6b6b;
   border: 0;
-  padding: 8px 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  font-size: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 48%;
 }
 
-.btn-secondary:hover {
-  background: #ffffff1f;
+.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(107, 107, 107, 0.4);
+}
+
+/* FEEDBACK */
+#feedbackMessage {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #ff6961;
+}
+
+#successMessage {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #4ade80;
 }
 
 footer {
@@ -413,9 +392,44 @@ footer {
   margin-top: auto;
 }
 
+option {
+  color: #000000;
+  background: #ffffff;
+}
+
 /* ==========================
-   ANIMAÇÃO
+   TERMOS DE USO / PRIVACIDADE — versão final
 ========================== */
+.privacy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.privacy input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #413ba7;
+  /* cor do checkbox */
+  appearance: auto;
+  /* garante exibição padrão do navegador */
+  opacity: 1;
+  /* garante visibilidade */
+  margin: 0;
+}
+
+.privacy label {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ANIMAÇÃO */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -432,36 +446,57 @@ footer {
    RESPONSIVIDADE
 ========================== */
 @media (max-width: 900px) {
-  .quick-actions .actions {
-    flex-direction: column;
-  }
-
-  .quick-actions .actions a {
-    width: 100%;
-    text-align: center;
-  }
-
-  .cards-grid,
-  .overview-cards,
-  .chart-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-section {
-    max-width: 100%;
+  form {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 600px) {
-  main.dashboard {
+@media (max-width: 768px) {
+
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  main {
     padding: 1rem;
   }
 
-  .chart-section {
-    padding: 1rem;
+  form {
+    grid-template-columns: 1fr;
   }
 
-  .quick-actions .actions a {
-    font-size: 0.95rem;
+  .buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .primary,
+  .secondary {
+    width: 100%;
   }
 }

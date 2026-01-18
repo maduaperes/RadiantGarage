@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "../../styles/Login.css";
 
-export default function LoginForm() {
+export default function LoginView() {
+  // =========================
+  // ESTADOS
+  // =========================
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [feedback, setFeedback] = useState("");
 
-  const handleSubmit = (e) => {
+  // =========================
+  // USUÁRIOS TESTE
+  // =========================
+  const usuariosTeste = [
+    { tipo: "admin", email: "...", senha: "..." },
+    { tipo: "cliente", email: "***", senha: "***" }
+  ];
+
+  // =========================
+  // HANDLER
+  // =========================
+  function handleSubmit(e) {
     e.preventDefault();
 
     if (!email || !senha) {
@@ -13,61 +28,74 @@ export default function LoginForm() {
       return;
     }
 
-    const validEmail = "...";
-    const validSenha = "...";
+    const usuario = usuariosTeste.find(
+      u => u.email === email && u.senha === senha
+    );
 
-    if (email !== validEmail || senha !== validSenha) {
+    if (!usuario) {
       setFeedback("Email ou senha incorretos.");
       return;
     }
 
-    setFeedback("Entrando em sua conta...");
-    localStorage.setItem("lj_user", JSON.stringify({ name: "Cliente", contact: email }));
+    setFeedback(`Entrando como ${usuario.tipo}...`);
+
+    localStorage.setItem(
+      "lj_user",
+      JSON.stringify({ name: usuario.tipo, contact: email })
+    );
 
     setTimeout(() => {
-      window.location.href = "dashboard.html";
+      if (usuario.tipo === "admin") {
+        window.location.href = "/dashboard";
+      } else {
+        window.location.href = "/agendamento";
+      }
     }, 1500);
-  };
+  }
 
+  // =========================
+  // JSX
+  // =========================
   return (
-    <>
-      <h2>Entrar</h2>
-      <p className="subtitle">Preencha os campos abaixo para entrar</p>
-      <form id="loginForm" onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="ex: voce@exemplo.com"
-        />
+    <main className="login-container">
+      <div className="login-card">
+        <h2>Login</h2>
 
-        <label>Senha</label>
-        <input
-          id="password"
-          type="password"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          placeholder="••••••"
-        />
+        <form onSubmit={handleSubmit}>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder="Digite seu email"
+          />
 
-        <button className="primary" type="submit">
-          Entrar
-        </button>
-      </form>
+          <label>Senha:</label>
+          <input
+            type="password"
+            value={senha}
+            onChange={e => setSenha(e.target.value)}
+            placeholder="Digite sua senha"
+          />
 
-      <div className="socials">
-        <button className="social">Entrar com Google</button>
-        <button className="social">Entrar com Facebook</button>
+          <button type="submit" className="primary">
+            Entrar
+          </button>
+
+          {feedback && (
+            <p
+              style={{
+                marginTop: 10,
+                textAlign: "center",
+                color: "red",
+                fontWeight: 600
+              }}
+            >
+              {feedback}
+            </p>
+          )}
+        </form>
       </div>
-
-      <p className="muted">
-        Ainda não tem conta? <a href="signup.html">Cadastre-se</a>
-      </p>
-
-      <div id="feedback" className="feedback-message">
-        {feedback}
-      </div>
-    </>
+    </main>
   );
 }

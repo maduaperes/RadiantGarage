@@ -1,10 +1,15 @@
 /* ==========================
-   Reset e base
+   RESET E CONFIGURAÇÕES BASE
 ========================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -16,334 +21,177 @@ body {
   flex-direction: column;
 }
 
-html {
-  overflow-y: scroll;
-}
-
 /* ==========================
-   HEADER DASHBOARD AJUSTADO
+   HEADER (Comum a todas as páginas)
 ========================== */
 header.header {
-    display: flex;
-    align-items: center;
-    /* Alinha Logo na esquerda e o right-group na direita */
-    justify-content: flex-start;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
-    /* Essencial para o posicionamento absoluto da busca */
-    position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 100;
+  min-height: 48px;
 }
 
-/* 1. LOGO: Posição Esquerda */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
-    cursor: pointer;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .logo span {
-    font-weight: bold;
-}
-
-.logo-icon {
-    font-size: 1.3rem;
-}
-
-/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
-.search-box {
-    /* CHAVE: Centralização Perfeita */
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
-}
-
-.search-box input {
-    height: 28px;
-    width: 350px; 
-    padding: 0 32px 0 8px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e6eef8;
-    transition: background 0.2s ease;
-}
-
-.search-box input::placeholder {
-    color: #94a3b8;
-}
-
-.search-box input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
-}
-
-.search-box button {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.search-box button:hover {
-    color: #fff;
-}
-
-/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
-.right-group {
-    display: flex;
-    align-items: center;
-    /* Espaço entre o menu NAV e o botão USER */
-    gap: 1.5rem; 
-    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
-    margin-left: auto;
-    z-index: 2;
-}
-
-/* 4. NAV: Agrupamento de Links DENTRO do right-group */
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-}
-
-.nav a {
-    font-size: 0.85rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.nav a:hover {
-    transform: translateY(-2px);
-    color: #aaa;
-}
-
-.nav span {
-    margin: 0 0.2rem;
-}
-
-/* 5. USER (Login): DENTRO do right-group */
-.user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.user a {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    color: #fff;
-    background: #413ba7;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.user a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* ==========================
-   MAIN DASHBOARD AJUSTADO
-========================== */
-main.dashboard {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
-  width: 100%;
-}
-
-/* ===== VISÃO GERAL (OVERVIEW) ===== */
-.overview {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-}
-
-.overview h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.overview-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-}
-
-.overview-cards .card {
-  background: #ffffff0d;
-  padding: 1.2rem;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.overview-cards .card h3 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.overview-cards .card p {
-  font-size: 1.25rem;
   font-weight: bold;
 }
 
-/* ===== AÇÕES RÁPIDAS (CORRIGIDO E MELHORADO) ===== */
-.quick-actions {
+.search-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.search-box input {
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 12px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.nav a {
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.user a {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ==========================
+   ESTRUTURA DE PÁGINAS (Main)
+========================== */
+main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  animation: fadeIn 0.6s ease;
+  width: 100%;
 }
 
-.quick-actions h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* Layout dos botões */
-.quick-actions .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-/* Links como botões */
-.quick-actions .actions a {
-  display: inline-flex;
+/* Centralização específica para a tela de Perfil */
+main:not(.dashboard) {
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+  padding: 60px 20px;
 }
 
-/* Botão primário */
-.quick-actions .actions a.primary {
-  background: #413ba7;
-  color: #fff;
+/* Layout para a Dashboard */
+main.dashboard {
+  gap: 2rem;
+  padding: 2rem 1.5rem;
 }
 
-.quick-actions .actions a.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  background: #4a42c5;
-}
-
-/* Botão secundário */
-.quick-actions .actions a.secondary {
-  background: #ffffff14;
-  color: #fff;
-}
-
-.quick-actions .actions a.secondary:hover {
-  background: #ffffff1f;
-  transform: translateY(-2px);
-}
-
-/* ===== CARDS DETALHADOS ===== */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+/* ==========================
+   CARD DE PERFIL E COMPONENTES
+========================== */
+.profile-card {
   width: 100%;
-}
-
-.card {
+  max-width: 500px;
+  height: auto;
   background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
   padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   animation: fadeIn 0.6s ease;
 }
 
-.card h3 {
-  margin-bottom: 0.8rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.card ul {
-  list-style: none;
-}
-
-.card ul li {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* ===== GRÁFICOS ===== */
-.charts {
+.profile-header {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 15px;
 }
 
-.chart-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+.avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #413ba7;
+  flex-shrink: 0;
 }
 
-.chart-section {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* ===== PROMOÇÕES ===== */
-.promo {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.avatar img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.promoCard {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+.user-info h2 {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
 }
 
-/* ===== FEEDBACK CLIENTES ===== */
+.user-info p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* ==========================
+   CLASSES DO DASHBOARD (Mantidas)
+========================== */
+.overview,
+.quick-actions,
+.charts,
+.promo,
 .feedback {
   display: flex;
   flex-direction: column;
@@ -351,71 +199,162 @@ main.dashboard {
   width: 100%;
 }
 
-.feedback h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
+.overview-cards,
+.cards-grid,
+.chart-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
 }
 
+.card,
+.chart-section,
+.promoCard,
 .feedback-card {
   background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== UNIDADES ===== */
-.mapCard {
+.quick-actions .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ==========================
+   BOTÕES GERAIS
+========================== */
+.btn-primary,
+.quick-actions .actions a.primary {
+  background: #413ba7;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.btn-secondary,
+.quick-actions .actions a.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ==========================
+   HISTÓRICOS E LISTAS (Scroll)
+========================== */
+.history-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 5px;
+  margin-top: 10px;
+}
+
+.history-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: 10px;
+  border-left: 4px solid #413ba7;
+}
+
+.status {
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.status.concluido {
+  background: #28a745;
+  color: #fff;
+}
+
+/* ==========================
+   MODAIS
+========================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.btn-primary {
-  background: #413ba7;
-  border: 0;
-  padding: 8px 12px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
+.modal.hidden {
+  display: none;
 }
 
-.btn-primary:hover {
-  background: #39358d;
+.modal-content {
+  background: #1a1f2e;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.btn-secondary {
-  background: #ffffff14;
-  border: 0;
-  padding: 8px 12px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 0.9rem;
 }
 
-.btn-secondary:hover {
-  background: #ffffff1f;
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0b1220;
+  color: white;
 }
 
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ==========================
+   FOOTER E ANIMAÇÃO
+========================== */
 footer {
   text-align: center;
-  padding: 1rem;
+  padding: 1.5rem;
   font-size: 0.85rem;
   background: rgba(255, 255, 255, 0.04);
   color: #94a3b8;
   margin-top: auto;
 }
 
-/* ==========================
-   ANIMAÇÃO
-========================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -428,40 +367,144 @@ footer {
   }
 }
 
-/* ==========================
-   RESPONSIVIDADE
-========================== */
-@media (max-width: 900px) {
+/* 1. Ajustes para Tablets e Telas Médias (Até 1024px) */
+@media (max-width: 1024px) {
+  .search-box input {
+    width: 250px;
+  }
+
+  main.dashboard {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Celulares Grandes (Até 768px) */
+@media (max-width: 768px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  /* DASHBOARD: Enquadramento total */
+  main.dashboard {
+    padding: 1rem;
+    /* Reduz espaçamento lateral para ganhar tela */
+  }
+
+  .overview-cards,
+  .cards-grid,
+  .chart-cards {
+    grid-template-columns: 1fr;
+    /* Uma coluna perfeita */
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  /* BOTÕES: Ajuste de enquadramento */
+  .quick-actions .actions {
+    display: grid;
+    /* Mudado para grid para manter tamanhos idênticos */
+    grid-template-columns: 1fr 1fr;
+    /* Dois botões por linha, perfeitamente alinhados */
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .quick-actions .actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 12px 5px;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+    /* Evita que o texto quebre em duas linhas */
+  }
+}
+
+/* 3. Ajustes para Celulares Pequenos (Até 480px) */
+@media (max-width: 480px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  /* Botões de Ação Empilhados */
   .quick-actions .actions {
     flex-direction: column;
   }
 
-  .quick-actions .actions a {
+  .btn-primary,
+  .btn-secondary,
+  .quick-actions .actions a.primary,
+  .quick-actions .actions a.secondary {
     width: 100%;
     text-align: center;
   }
 
-  .cards-grid,
-  .overview-cards,
-  .chart-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-section {
-    max-width: 100%;
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
   }
 }
 
-@media (max-width: 600px) {
-  main.dashboard {
-    padding: 1rem;
-  }
+/* Ajuste para garantir que imagens não estourem o container */
+img {
+  max-width: 100%;
+  height: auto;
+}
 
-  .chart-section {
-    padding: 1rem;
-  }
-
-  .quick-actions .actions a {
-    font-size: 0.95rem;
-  }
+/* Melhoria no scroll interno para touch */
+.history-list {
+  -webkit-overflow-scrolling: touch;
 }

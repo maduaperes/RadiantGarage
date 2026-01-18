@@ -21,148 +21,150 @@ body {
    HEADER
 ========================== */
 header.header {
-    display: flex;
-    align-items: center;
-    /* Alinha Logo na esquerda e o right-group na direita */
-    justify-content: flex-start;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
-    /* Essencial para o posicionamento absoluto da busca */
-    position: relative; 
+  display: flex;
+  align-items: center;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
 }
 
 /* 1. LOGO: Posição Esquerda */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
-    cursor: pointer;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .logo span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .logo-icon {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
-    /* CHAVE: Centralização Perfeita */
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
 }
 
 .search-box input {
-    height: 28px;
-    width: 350px; 
-    padding: 0 32px 0 8px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e6eef8;
-    transition: background 0.2s ease;
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
 }
 
 .search-box input::placeholder {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
 .search-box input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .search-box button {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    cursor: pointer;
-    font-size: 0.9rem;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .search-box button:hover {
-    color: #fff;
+  color: #fff;
 }
 
 /* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
 .right-group {
-    display: flex;
-    align-items: center;
-    /* Espaço entre o menu NAV e o botão USER */
-    gap: 1.5rem; 
-    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
-    margin-left: auto;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
 }
 
 /* 4. NAV: Agrupamento de Links DENTRO do right-group */
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 .nav a {
-    font-size: 0.85rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
-    transform: translateY(-2px);
-    color: #aaa;
+  transform: translateY(-2px);
+  color: #aaa;
 }
 
 .nav span {
-    margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 
 /* 5. USER (Login): DENTRO do right-group */
 .user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .user a {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    color: #fff;
-    background: #413ba7;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .user a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================
@@ -288,7 +290,7 @@ textarea:focus {
 input::placeholder,
 textarea::placeholder {
   color: #94a3b8;
-  opacity: 1; 
+  opacity: 1;
 }
 
 /* ==========================
@@ -343,7 +345,7 @@ textarea::placeholder {
 }
 
 input[type="checkbox"] {
- accent-color: #413ba7;
+  accent-color: #413ba7;
 }
 
 /* ==========================
@@ -397,19 +399,19 @@ option {
 }
 
 #feedbackMessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #4ade80;
-    font-size: 0.9rem;
-    font-weight: 600;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4ade80;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 #feedbackMessage.active {
-    display: flex;
-    opacity: 1;
+  display: flex;
+  opacity: 1;
 }
 
 
@@ -432,6 +434,36 @@ footer {
    RESPONSIVIDADE
 ========================== */
 @media (max-width: 800px) {
+
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
   .row-2 {
     grid-template-columns: 1fr;
   }

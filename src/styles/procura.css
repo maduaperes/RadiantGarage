@@ -1,0 +1,577 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(180deg, #0b1220, #111827);
+  color: #e6eef8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+option {
+  color: #000000;
+  background: #ffffff;
+}
+
+/* ==========================
+   FEEDBACK MESSAGE
+========================== */
+#feedbackMessage {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #fff;
+}
+
+#feedbackMessage.success {
+  display: block;
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+#feedbackMessage.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+#feedbackMessage.info {
+  display: block;
+  background: rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+}
+
+/* ==========================
+   HEADER
+========================== */
+header.header {
+  display: flex;
+  align-items: center;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
+}
+
+/* 1. LOGO: Posição Esquerda */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.logo span {
+  font-weight: bold;
+}
+
+.logo-icon {
+  font-size: 1.3rem;
+}
+
+/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
+.search-box {
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
+}
+
+.search-box input {
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.search-box input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.search-box button:hover {
+  color: #fff;
+}
+
+/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
+.right-group {
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
+}
+
+/* 4. NAV: Agrupamento de Links DENTRO do right-group */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+  transform: translateY(-2px);
+  color: #aaa;
+}
+
+.nav span {
+  margin: 0 0.2rem;
+}
+
+/* 5. USER (Login): DENTRO do right-group */
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.user a {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   MAIN
+========================== */
+main {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  flex: 1;
+}
+
+/* ==========================
+   SEARCH FILTERS
+========================== */
+.search-filters {
+  flex: 0 0 250px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.search-filters .filter {
+  margin-bottom: 1rem;
+}
+
+.search-filters label {
+  display: inline-block;
+}
+
+.search-filters h2 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.search-filters form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.search-filters input,
+.search-filters select {
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+}
+
+.search-filters input::placeholder {
+  color: #94a3b8;
+}
+
+.search-filters button.search-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.search-filters button.search-btn:hover {
+  background: #1e40af;
+}
+
+/* ==========================
+   MULTI SELECT
+========================== */
+.multi-select {
+  position: relative;
+}
+
+.select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.options-container {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: rgba(30, 41, 59, 0.95);
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: none;
+  flex-direction: column;
+  max-height: 250px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 99999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.options-container.open {
+  display: flex !important;
+}
+
+.options-container label.option {
+  display: flex;
+  align-items: center;
+  /* faz checkbox e texto ficarem na mesma linha */
+  gap: 8px;
+  /* distância entre checkbox e texto */
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+  color: #e6eef8;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.options-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: inline-block;
+  /* garante que não seja block */
+}
+
+.options-container span {
+  display: inline-block;
+  /* garante que o texto fique ao lado do checkbox */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(70%) brightness(1.3);
+  cursor: pointer;
+}
+
+button.clear-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+button.clear-btn:hover {
+  background: #b91c1c;
+}
+
+/* ==========================
+   SERVICE RESULTS
+========================== */
+.service-results {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.service-results h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.service-info {
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.service-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.service-info p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.service-info a {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.service-info a:hover {
+  color: #1e40af;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  margin-top: auto;
+}
+
+/* ... (Seu CSS original permanece igual até chegar na parte da responsividade) ... */
+
+/* ==========================
+   RESPONSIVIDADE (MANTER HEADER)
+========================== */
+
+/* Ajuste para telas médias (Tablets e Laptops pequenos) */
+@media (max-width: 1100px) {
+
+  /* Ajuste fino para o header não encavalar links */
+  .search-box input {
+    width: 280px;
+  }
+
+  .nav {
+    gap: 0.5rem;
+  }
+
+  /* Garante que o main continue em linha (filtro à esquerda) */
+  main {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .search-filters {
+    flex: 0 0 220px;
+    /* Reduzi levemente a largura para dar mais espaço aos cards */
+  }
+}
+
+/* Ajuste para Celulares (Baseado no seu Header anterior) */
+@media (max-width: 768px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  /* Ajuste de Filtros no Mobile */
+  .search-filters form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Filtros ficam lado a lado para poupar altura */
+    gap: 1rem;
+  }
+
+  .search-filters h2 {
+    grid-column: 1 / -1;
+  }
+
+  .search-filters .filter-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+  }
+
+  .search-filters button {
+    flex: 1;
+  }
+
+  /* Resultados em Grade de 2 colunas */
+  .service-results {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* Ajuste para Celulares Muito Pequenos */
+@media (max-width: 480px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  .search-filters form {
+    grid-template-columns: 1fr;
+    /* Volta para uma coluna em telas mínimas */
+  }
+
+  .service-results {
+    grid-template-columns: 1fr;
+    /* Cards ocupam a largura toda */
+  }
+
+  .service-card img {
+    height: 180px;
+    /* Melhora o aspecto visual do card solitário */
+  }
+}
