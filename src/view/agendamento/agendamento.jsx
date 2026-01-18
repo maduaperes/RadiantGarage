@@ -1,149 +1,226 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../styles/agendamento.css";
 
-export default function Agendamento() {
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
+export default function AgendamentoView() {
+  // =========================
+  // ESTADOS
+  // =========================
+  const [form, setForm] = useState({
     nome: "",
     telefone: "",
     veiculo: "",
     pagamento: "",
     observacoes: "",
-    termos: false,
+    servico: "manutencao_motor",
+    termos: false
   });
 
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState({ text: "", type: "" });
 
+  // =========================
+  // HANDLERS
+  // =========================
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
 
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    setForm(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value
+    }));
   }
 
   function handleTelefone(e) {
-    setFormData({
-      ...formData,
-      telefone: e.target.value.replace(/\D/g, ""),
-    });
+    const somenteNumeros = e.target.value.replace(/\D/g, "");
+    setForm(prev => ({ ...prev, telefone: somenteNumeros }));
+  }
+
+  function showMessage(text, type = "error") {
+    setFeedback({ text, type });
+
+    setTimeout(() => {
+      setFeedback({ text: "", type: "" });
+    }, 2000);
+  }
+
+  function validateForm() {
+    if (
+      !form.nome ||
+      !form.telefone ||
+      !form.veiculo ||
+      !form.pagamento ||
+      !form.servico
+    ) {
+      showMessage("Por favor, preencha todos os campos obrigatórios.");
+      return false;
+    }
+
+    if (!form.termos) {
+      showMessage("Você deve aceitar os termos de uso.");
+      return false;
+    }
+
+    return true;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!formData.nome || !formData.telefone || !formData.veiculo) {
-      setFeedback("Preencha todos os campos obrigatórios.");
-      return;
-    }
+    if (!validateForm()) return;
 
-    if (!formData.termos) {
-      setFeedback("Aceite os termos para continuar.");
-      return;
-    }
+    const cliente = {
+      nome: form.nome,
+      telefone: form.telefone
+    };
 
-    localStorage.setItem("ultimoAgendamento", JSON.stringify(formData));
+    const agendamento = {
+      veiculo: form.veiculo,
+      servico: form.servico,
+      pagamento: form.pagamento,
+      observacoes: form.observacoes
+    };
 
-    setFeedback("Agendamento realizado com sucesso!");
+    const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+    clientes.push(cliente);
+
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+    localStorage.setItem("ultimoAgendamento", JSON.stringify(agendamento));
+
+    showMessage("Agendamento realizado com sucesso!", "success");
 
     setTimeout(() => {
-      navigate("/dashboard");
+      window.location.href = "/status";
     }, 1500);
   }
 
+  function handleClear() {
+    setForm({
+      nome: "",
+      telefone: "",
+      veiculo: "",
+      pagamento: "",
+      observacoes: "",
+      servico: "manutencao_motor",
+      termos: false
+    });
+
+    showMessage("Formulário limpo com sucesso!", "success");
+  }
+
+  // =========================
+  // JSX
+  // =========================
   return (
     <main>
       <div className="card">
         <h2>Agendar Serviço</h2>
+        <p className="subtitle">
+          Preencha os campos abaixo para agendar o seu atendimento
+        </p>
 
         <form onSubmit={handleSubmit}>
           <div className="col">
-            <label>Nome</label>
+            <label>Nome completo:</label>
             <input
               name="nome"
-              value={formData.nome}
+              value={form.nome}
               onChange={handleChange}
               required
             />
 
-            <label>Telefone</label>
+            <label>Telefone:</label>
             <input
               name="telefone"
-              value={formData.telefone}
+              value={form.telefone}
               onChange={handleTelefone}
               required
             />
           </div>
 
           <div className="col">
-            <label>Veículo</label>
+            <label>Modelo do veículo:</label>
             <input
               name="veiculo"
-              value={formData.veiculo}
+              value={form.veiculo}
               onChange={handleChange}
               required
             />
 
-            <label>Pagamento</label>
+            <label>Forma de pagamento:</label>
             <select
               name="pagamento"
-              value={formData.pagamento}
+              value={form.pagamento}
               onChange={handleChange}
               required
             >
               <option value="">Selecione</option>
               <option value="pix">Pix</option>
-              <option value="cartao">Cartão</option>
+              <option value="cartao">Cartão de crédito</option>
+              <option value="debito">Cartão de débito</option>
               <option value="dinheiro">Dinheiro</option>
             </select>
           </div>
 
           <div className="full-width">
+            <label>Observações:</label>
             <textarea
               name="observacoes"
-              placeholder="Observações"
-              value={formData.observacoes}
+              value={form.observacoes}
               onChange={handleChange}
             />
+          </div>
+
+          <div className="full-width">
+            <label>Serviço:</label>
+            <select
+              name="servico"
+              value={form.servico}
+              onChange={handleChange}
+              required
+            >
+              <option value="manutencao_motor">
+                Manutenção do Motor
+              </option>
+            </select>
           </div>
 
           <div className="privacy">
             <input
               type="checkbox"
               name="termos"
-              checked={formData.termos}
+              checked={form.termos}
               onChange={handleChange}
             />
-            <label>Aceito os termos</label>
+            <label>Li e aceito os termos de uso e privacidade</label>
           </div>
 
-          <div className="buttons">
+          <div className="full-width buttons">
             <button type="submit" className="primary">
-              Confirmar
+              Confirmar agendamento
             </button>
-
             <button
               type="button"
               className="secondary"
-              onClick={() =>
-                setFormData({
-                  nome: "",
-                  telefone: "",
-                  veiculo: "",
-                  pagamento: "",
-                  observacoes: "",
-                  termos: false,
-                })
-              }
+              onClick={handleClear}
             >
               Limpar
             </button>
           </div>
 
-          {feedback && <p id="feedbackMessage">{feedback}</p>}
+          {feedback.text && (
+            <div
+              style={{
+                marginTop: 10,
+                fontWeight: 600,
+                textAlign: "center",
+                color:
+                  feedback.type === "success"
+                    ? "#4ade80"
+                    : "#f87171"
+              }}
+            >
+              {feedback.text}
+            </div>
+          )}
         </form>
       </div>
     </main>
