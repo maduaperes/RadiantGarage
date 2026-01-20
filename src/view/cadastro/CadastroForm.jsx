@@ -1,6 +1,7 @@
-import "../styles/novo-cliente.css";
+import React from "react";
+//import "./style.css";
 
-export default function NovoClienteView({
+export default function CadastroForm({
   form,
   onChange,
   onSubmit,
@@ -44,99 +45,44 @@ export default function NovoClienteView({
           <form className="form-grid" onSubmit={onSubmit}>
             <div className="column">
               <label>Nome Completo</label>
-              <input
-                name="name"
-                value={form.name}
-                onChange={onChange}
-                required
-              />
+              <input name="name" value={form.name} onChange={onChange} required />
 
               <label>Telefone</label>
-              <input
-                name="phone"
-                value={form.phone}
-                onChange={onChange}
-                required
-              />
+              <input name="phone" value={form.phone} onChange={onChange} required />
 
               <label>Email</label>
-              <input
-                name="email"
-                value={form.email}
-                onChange={onChange}
-                required
-              />
+              <input name="email" value={form.email} onChange={onChange} required />
 
               <label>Data de Nascimento</label>
-              <input
-                type="date"
-                name="birth"
-                value={form.birth}
-                onChange={onChange}
-              />
+              <input type="date" name="birth" value={form.birth} onChange={onChange} />
             </div>
 
             <div className="column">
               <label>CPF</label>
-              <input
-                name="cpf"
-                value={form.cpf}
-                onChange={onChange}
-              />
+              <input name="cpf" value={form.cpf} onChange={onChange} />
 
               <label>Endereço</label>
-              <input
-                name="address"
-                value={form.address}
-                onChange={onChange}
-              />
+              <input name="address" value={form.address} onChange={onChange} />
 
               <label>Modelo do Veículo</label>
-              <input
-                name="car"
-                value={form.car}
-                onChange={onChange}
-                required
-              />
+              <input name="car" value={form.car} onChange={onChange} required />
 
               <label>Marca do Veículo</label>
-              <input
-                name="brand"
-                value={form.brand}
-                onChange={onChange}
-              />
+              <input name="brand" value={form.brand} onChange={onChange} />
             </div>
 
             <div className="column">
               <label>Ano</label>
-              <input
-                type="number"
-                name="year"
-                value={form.year}
-                onChange={onChange}
-              />
+              <input type="number" name="year" value={form.year} onChange={onChange} />
 
               <label>Placa</label>
-              <input
-                name="plate"
-                value={form.plate}
-                onChange={onChange}
-              />
+              <input name="plate" value={form.plate} onChange={onChange} />
 
               <label>Cor</label>
-              <input
-                name="color"
-                value={form.color}
-                onChange={onChange}
-              />
+              <input name="color" value={form.color} onChange={onChange} />
 
               <label>Quilometragem</label>
-              <input
-                type="number"
-                name="mileage"
-                value={form.mileage}
-                onChange={onChange}
-              />
+              <input type="number" name="mileage" value={form.mileage} onChange={onChange} />
             </div>
 
             <div className="full-width-field">
