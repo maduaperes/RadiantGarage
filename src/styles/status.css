@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box
+}
+
+.top {
+  position: fixed;          /* Fixa no topo da janela */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.top .mini {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.top .mini:hover {
+  transform: scale(1.05);
+  border-color: #38bdf8;
+}
+
+.user {
+  font-weight: 600;
+  font-size: 1.05rem;
+  background: linear-gradient(90deg, #4f46e5, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.back {
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #4f46e5, #f97316);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+}
+
+
+body {
+    font-family: Inter, Arial;
+    background: linear-gradient(180deg, #071126, #0b1220);
+    color: #e6eef8;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0
+}
+
+.card {
+    width: 92%;
+    max-width: 520px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    text-align: center
+}
+
+.status {
+    padding: 18px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    margin-top: 10px
+}
+
+.eta {
+    color: #94a3b8;
+    margin-top: 8px
+}
+
+.primary {
+    margin-top: 12px;
+    background: linear-gradient(90deg, #4f46e5, #f97316);
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.secondary {
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px;
+    border-radius: 10px;
+    color: #e6eef8;
+    cursor: pointer
+}
